@@ -13,13 +13,29 @@ export default {
 }
 </script>
 
+<!-- Global Application Styles-->
 <style lang="scss">
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html * {
+   color: #000 !important;
+   font-family: "Source Sans Pro", sans-serif !important;
+}
+
+html,
+body,
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100vw;
+  height: 100vh;
+}
+
+#app {
+  background-color: #FAF9F7;
 }
 </style>
