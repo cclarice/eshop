@@ -8,7 +8,7 @@
            :class="{hasError: hasError}"
            :placeholder="placeholder"
            type="text">
-    <span class="BaseInputTextError">{{ errorMessage }}</span>
+    <span class="BaseInputTextError" :class="hasError">{{ errorMessage }}</span>
   </label>
 </template>
 

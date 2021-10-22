@@ -6,7 +6,8 @@
     </header>
     <main class="EshopMain">
       <ProductForm class="EshopProductForm"/>
-      <ProductStack class="EshopProductStack"/>
+      <ProductStack class="EshopProductStack"
+                    :products="products"/>
     </main>
   </div>
 </template>
@@ -19,7 +20,49 @@ import ProductStack from "@/components/eshop/ProductStack";
 
 export default Vue.extend({
   name: 'Eshop',
-  components: { BaseDropdown, ProductForm, ProductStack }
+  components: { BaseDropdown, ProductForm, ProductStack },
+  data () {
+    return {
+      products: [
+        {
+          name: 'Fuel EX 2020',
+          description: '',
+          image: '',
+          price: ''
+        },
+        {
+          name: 'Marin Hawk Hill One',
+          description: '',
+          image: '',
+          price: ''
+        },
+        {
+          name: 'Maverick Juliana',
+          description: '',
+          image: '',
+          price: ''
+        },
+        {
+          name: 'Norco Aurum',
+          description: '',
+          image: '',
+          price: ''
+        },
+        {
+          name: 'Pivot Switch Blade Pro',
+          description: '',
+          image: '',
+          price: ''
+        },
+        {
+          name: 'Helmet FOX v3',
+          description: '',
+          image: '',
+          price: '/foxHelmetv3.jpg'
+        }
+      ]
+    }
+  }
 })
 </script>
 
@@ -48,7 +91,6 @@ export default Vue.extend({
     justify-content: space-between;
     .EshopProductForm {
       width: calc(25% - 16px * 0.75);
-      height: 440px; // todo: delete this
 
       box-shadow: 0 20px 30px rgba(0, 0, 0, 0.04), 0 6px 10px rgba(0, 0, 0, 0.02);
 

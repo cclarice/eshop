@@ -56,7 +56,7 @@ export default Vue.extend({
 .BaseTextarea {
   display: flex;
   flex-direction: column;
-  margin-bottom: 2px;
+  margin-bottom: 14px;
   .BaseTextareaHeader {
     font-size: 10px;
     line-height: 13px;
