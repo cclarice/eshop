@@ -8,7 +8,7 @@
       <ProductForm class="EshopProductForm"/>
       <ProductStack class="EshopProductStack"
                     :products="this.products"
-                    @removeProduct="removeProduct"/>
+                    @removeProduct="removeProduct($event)"/>
     </main>
   </div>
 </template>

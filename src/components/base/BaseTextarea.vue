@@ -16,8 +16,10 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'BaseTextarea',
-  data: {
-    errorMessage: 'Поле является обязательным'
+  data () {
+    return {
+      errorMessage: 'Поле является обязательным'
+    }
   },
   props: {
     header: {

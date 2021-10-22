@@ -17,7 +17,7 @@ export default Vue.extend({
   props: {
     options: {
       type: Array,
-      default: []
+      default: () => {return []}
     },
     value: {
       type: String,

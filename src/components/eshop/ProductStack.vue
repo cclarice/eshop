@@ -2,9 +2,12 @@
   <div class="ProductStack">
     <Product class="Product"
              v-for="product of products"
-             :product="product"/>
+             :product="product"
+             @removeProduct="removeProduct($event)"/>
     <Product class="Product"
-             v-if="!products.length" :product="{}"/>
+             v-if="!products.length"
+             :product="{}"
+             @removeProduct="null"/>
   </div>
 </template>
 
@@ -34,6 +37,9 @@ export default Vue.extend({
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+  & > *:not(:nth-child(3n+3)) {
+    margin-right: 16px;
+  }
 }
 </style>

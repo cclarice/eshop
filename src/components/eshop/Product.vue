@@ -1,9 +1,14 @@
 <template>
-  <div class="Product" @hover="removeSetVisibility(true)" @blur="removeSetVisibility(false)">
-    <div class="ProductRemovePosition">
-      <div class="ProductRemove" :class="{ProductRemoveVisible: this.removeVisible}" @click="removeProduct"/>
+  <div class="Product"
+       @mouseenter="removeSetVisibility(true)"
+       @mouseleave="removeSetVisibility(false)">
+    <div v-if="this.removeVisible" class="ProductRemovePosition">
+      <div class="ProductRemove"
+           :class="{ProductRemoveVisible: this.removeVisible}"
+           @click="removeProduct"/>
     </div>
-    <div class="ProductImage" :style="{ backgroundImage: 'url(' +  product.image + ')' }"/>
+    <div class="ProductImage"
+         :style="{ backgroundImage: 'url(' +  product.image + ')' }"/>
     <h3 class="ProductHeader">
       {{ product.name }}
     </h3>
@@ -40,7 +45,6 @@ export default Vue.extend({
 
       const priceString = this.product.price.toString()
       let   price       = '' + priceString[priceString.length - 1]
-      console.log(price, priceString)
 
       for (let i = priceString.length - 2; i >= 0; i--) {
         if (!((i + 1) % 3)) {
@@ -52,8 +56,8 @@ export default Vue.extend({
     }
   },
   methods: {
-    removeProduct(productId) {
-      this.$emit('removeProduct', productId)
+    removeProduct() {
+      this.$emit('removeProduct', this.product.id)
     },
     removeSetVisibility (visible) {
       this.removeVisible = visible
@@ -78,10 +82,11 @@ export default Vue.extend({
 
     width: 100%;
     padding: 30.125% 0;
-    background-color: red;
+    background-color: #DBDAE0;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    z-index: 5;
   }
   .ProductHeader {
     font-weight: 600;
@@ -105,18 +110,33 @@ export default Vue.extend({
 
 
   // Remove Button
+  &:hover {
+    z-index: 10;
+  }
   .ProductRemovePosition {
     display: flex;
+    flex-direction: row-reverse;
     height: 0;
     max-height: 0;
     .ProductRemove {
       width: 32px;
       height: 32px;
       position: sticky;
-      background-image: url("src/assets/required.svg");
+      background-image: url("../../assets/remove.svg");
+      z-index: 11;
+      transform: translate(25%, -25%);
+      animation: ease removeAppear 0.5s;
     }
   }
 
 }
 
+@keyframes removeAppear {
+  from {
+    transform: scale(0) translate(25%, -25%);
+  }
+  to {
+    transform: scale(1) translate(25%, -25%);
+  }
+}
 </style>

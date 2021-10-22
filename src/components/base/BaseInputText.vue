@@ -5,10 +5,13 @@
       <img v-if="required" class="BaseInputTextRequired" src="../../assets/required.svg" alt="Required">
     </span>
     <input class="BaseInputTextText"
-           :class="{hasError: hasError}"
+           :class="{ hasError: this.hasError }"
            :placeholder="placeholder"
-           type="text">
-    <span class="BaseInputTextError" :class="hasError">{{ errorMessage }}</span>
+           type="text"
+           @blur="checkValue"
+           v-model="value"
+           @change="changeValue(value)">
+    <span class="BaseInputTextError" :class="{ hasError: this.hasError }">{{ errorMessage }}</span>
   </label>
 </template>
 
@@ -19,7 +22,9 @@ export default Vue.extend({
   name: 'BaseInputText',
   data () {
     return {
-      errorMessage: 'Поле является обязательным'
+      errorMessage: 'Поле является обязательным',
+      hasError: false,
+      value: ''
     }
   },
   props: {
@@ -31,25 +36,22 @@ export default Vue.extend({
       type: String,
       default: ''
     },
-    value: {
+    defaultValue: {
       type: String,
       default: ''
     },
     required: {
       type: Boolean,
       default: false
-    },
-    hasError: {
-      type: Boolean,
-      default: false
     }
   },
   methods: {
     changeValue (value) {
+      console.log('TryChange to', value)
       this.$emit('changeValue', value)
     },
     checkValue () {
-      this.hasError = (this.required && this.value.length)
+      this.hasError = (this.required && !this.value.length)
     }
   }
 })
@@ -93,6 +95,7 @@ export default Vue.extend({
     }
   }
   .BaseInputTextError {
+    opacity: 0;
     margin-top: 4px;
 
     font-size: 8px;
@@ -105,6 +108,7 @@ export default Vue.extend({
 
 
 .hasError {
-  border-color: #FF8484
+  opacity: 1 !important;
+  border-color: #FF8484;
 }
 </style>
