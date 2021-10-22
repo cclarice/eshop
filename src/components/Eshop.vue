@@ -7,7 +7,8 @@
     <main class="EshopMain">
       <ProductForm class="EshopProductForm"/>
       <ProductStack class="EshopProductStack"
-                    :products="products"/>
+                    :products="this.products"
+                    @removeProduct="removeProduct"/>
     </main>
   </div>
 </template>
@@ -25,42 +26,56 @@ export default Vue.extend({
     return {
       products: [
         {
+          id: 0,
           name: 'Fuel EX 2020',
-          description: '',
-          image: '',
-          price: ''
+          description: 'Двухподвес высшего уровня с оборудованием начального профессионального класса Sram, 12 скоростей',
+          image: '/products/FuelEX2020.jpg',
+          price: 257696
         },
         {
-          name: 'Marin Hawk Hill One',
-          description: '',
-          image: '',
-          price: ''
+          id: 1,
+          name: 'Marin Hawk Hill 1',
+          description: 'Лучшее соотношение цены и качества, простая рекомендация для новичков и райдеров с ограниченным бюджетом',
+          image: '/products/MarinHawkHill1.jpg',
+          price: 133190
         },
         {
+          id: 2,
           name: 'Maverick Juliana',
-          description: '',
-          image: '',
-          price: ''
+          description: 'Создан для прохождения самых разных трасс. Он маневренный и агрессивный. Райдеры могут регулировать геометрию с помощью флип-чипа',
+          image: '/products/mavericJuliana.jpg',
+          price: 348300
         },
         {
+          id: 3,
           name: 'Norco Aurum',
-          description: '',
-          image: '',
-          price: ''
+          description: 'Не важно, катаетесь вы в байк-парках или боретесь за секунды на гонках, Aurum готов к любым испытания вместе с вами',
+          image: '/products/norcoAurum.jpg',
+          price: 316630
         },
         {
-          name: 'Pivot Switch Blade Pro',
-          description: '',
-          image: '',
-          price: ''
+          id: 4,
+          name: 'HERO10 Black',
+          description: 'Позволяет создавать видео 5.3K с удвоенной частотой кадров, фото 23 Мп, а также обеспечивает улучшенное качество',
+          image: '/products/hero10black.jpeg',
+          price: 49990
         },
         {
+          id: 5,
           name: 'Helmet FOX v3',
-          description: '',
-          image: '',
-          price: '/foxHelmetv3.jpg'
+          description: 'Самый технологичный мотошлем, который можно найти. Новая высокоэффективная система вентиляции и свежий подход к защите от прямых и боковых ударов.',
+          image: '/products/foxHelmetv3.jpg',
+          price: 16836
         }
       ]
+    }
+  },
+  methods: {
+    addProduct (product) {
+      this.products.push(product)
+    },
+    removeProduct (productId) {
+      this.products = this.products.filter(p => p.id !== productId)
     }
   }
 })

@@ -20,6 +20,11 @@ export default Vue.extend({
       type: Array,
       default: []
     }
+  },
+  methods: {
+    removeProduct(productId) {
+      this.$emit('removeProduct', productId)
+    }
   }
 })
 </script>
@@ -29,5 +34,6 @@ export default Vue.extend({
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 </style>
