@@ -1,10 +1,22 @@
 <template>
   <div class="EshopProductForm">
-    <BaseInputText class="FormName"/>
-    <BaseTextarea class="FormDescription"/>
-    <BaseInputText class="FormImageLink"/>
-    <BaseInputText class="FormPrice"/>
-    <BaseButton class="FormAccept"/>
+    <BaseInputText class="FormName"
+                   header="Наименование товара"
+                   :placeholder="'Введите наименование товара'"
+                   :required="true"/>
+    <BaseTextarea class="FormDescription"
+                  header="Описание товара"
+                  :placeholder="'Введите описание товара'"/>
+    <BaseInputText class="FormImageLink"
+                   header="Ссылка на изображение товара"
+                   :placeholder="'Введите ссылку'"
+                   :required="true"/>
+    <BaseInputText class="FormPrice"
+                   header="Цена товара"
+                   :placeholder="'Введите цену'"
+                   :required="true"/>
+    <BaseButton class="FormAccept"
+                text="Добавить товар"/>
   </div>
 </template>
 
@@ -21,5 +33,14 @@ export default Vue.extend({
 </script>
 
 <style scoped lang='scss'>
-
+.EshopProductForm {
+  display: flex;
+  flex-direction: column;
+  .FormAccept {
+    margin-top: 10px;
+  }
+  .BaseInputText {
+    max-height: 67px;
+  }
+}
 </style>

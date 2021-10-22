@@ -32,6 +32,12 @@ export default Vue.extend({
 
     display: flex;
     justify-content: space-between;
+
+    h1 {
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 36px;
+    }
   }
   .EshopMain {
     margin-top: 16px;
@@ -40,12 +46,6 @@ export default Vue.extend({
 
     display: flex;
     justify-content: space-between;
-
-    h1 {
-      font-weight: 600;
-      font-size: 28px;
-      line-height: 36px;
-    }
     .EshopProductForm {
       width: calc(25% - 16px * 0.75);
       height: 440px; // todo: delete this
@@ -58,7 +58,6 @@ export default Vue.extend({
     }
     .EshopProductStack {
       width: calc(75% - 16px * 0.25);
-
     }
   }
 }

@@ -7,7 +7,7 @@
     <textarea class="BaseTextareaText"
               :class="{hasError: hasError}">
     </textarea>
-    <span class="BaseTextareaError"></span>
+    <!-- Unused <span class="BaseTextareaError"> {{ hasError ? errorMessage : '' }} </span> -->
   </label>
 </template>
 
@@ -53,7 +53,41 @@ export default Vue.extend({
 </script>
 
 <style scoped lang='scss'>
+.BaseTextarea {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2px;
+  .BaseTextareaHeader {
+    font-size: 10px;
+    line-height: 13px;
+    letter-spacing: -0.02em;
+    color: #49485E;
+    margin-bottom: 4px;
+  }
+  .BaseTextareaText {
+    width: 100%;
+    height: 108px;
+    resize: none;
+
+    background: #FFFEFB;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+
+    outline: none;
+    border: none;
+    padding: 10px 14px;
+
+    font-size: 12px;
+    line-height: 15px;
+    color: #3F3F3F;
+  }
+}
 .hasError {
   border-color: #FF8484
+}
+.invisible {
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
 }
 </style>

@@ -16,6 +16,7 @@ export default {
 <!-- Global Application Styles-->
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+@import url("https://fonts.googleapis.com/css?family=Inter");
 
 * {
   margin: 0;
@@ -24,8 +25,8 @@ export default {
 }
 
 html * {
-   color: #000 !important;
-   font-family: "Source Sans Pro", sans-serif !important;
+  color: #3F3F3F;
+  font-family: "Source Sans Pro", sans-serif !important;
 }
 
 html,
