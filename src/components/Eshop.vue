@@ -5,7 +5,8 @@
       <BaseDropdown/>
     </header>
     <main class="EshopMain">
-      <ProductForm class="EshopProductForm"/>
+      <ProductForm class="EshopProductForm"
+                   @addProduct="addProduct($event)"/>
       <ProductStack class="EshopProductStack"
                     :products="this.products"
                     @removeProduct="removeProduct($event)"/>
@@ -48,6 +49,12 @@ export default Vue.extend({
         },
         {
           id: 3,
+          name: 'Image error',
+          description: 'Image not found',
+          price: 404
+        }/*,
+        {
+          id: 3,
           name: 'Norco Aurum',
           description: 'Не важно, катаетесь вы в байк-парках или боретесь за секунды на гонках, Aurum готов к любым испытания вместе с вами',
           image: '/products/norcoAurum.jpg',
@@ -66,7 +73,7 @@ export default Vue.extend({
           description: 'Самый технологичный мотошлем, который можно найти. Новая высокоэффективная система вентиляции и свежий подход к защите от прямых и боковых ударов.',
           image: '/products/foxHelmetv3.jpg',
           price: 16836
-        }
+        }*/
       ]
     }
   },
@@ -104,6 +111,7 @@ export default Vue.extend({
 
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     .EshopProductForm {
       width: calc(25% - 16px * 0.75);
 

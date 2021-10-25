@@ -1,7 +1,7 @@
 <template>
   <select class="BaseDropdown"
           :aria-disabled="!options.length"
-          :v-model="value"
+          v-model="value"
           @change="changeValue">
     <option v-for="option in options" :value="option.value">
       {{ option.name }}
@@ -17,7 +17,7 @@ export default Vue.extend({
   props: {
     options: {
       type: Array,
-      default: () => {return []}
+      default: () => { return [] }
     },
     value: {
       type: String,

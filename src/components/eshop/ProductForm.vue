@@ -4,7 +4,8 @@
                    header="Наименование товара"
                    :placeholder="'Введите наименование товара'"
                    :required="true"
-                   @changeValue="changeValue('formName', $event)"/>
+                   @changeValue="changeValue('formName', $event)"
+                   ref="InputName"/>
     <BaseTextarea class="FormDescription"
                   header="Описание товара"
                   :placeholder="'Введите описание товара'"
@@ -18,9 +19,12 @@
                    header="Цена товара"
                    :placeholder="'Введите цену'"
                    :required="true"
+                   :type="'number'"
                    @changeValue="changeValue('formPrice', $event)"/>
     <BaseButton class="FormAccept"
-                text="Добавить товар"/>
+                text="Добавить товар"
+                @clickButton="addProduct(formName, formDescription, formImage, formPrice)"
+                :disabled="!valid"/>
   </div>
 </template>
 
@@ -38,16 +42,19 @@ export default Vue.extend({
       formName: '',
       formDescription: '',
       formImage: '',
-      formPrice: 0
+      formPrice: 0,
+      valid: false
     }
   },
   methods: {
     changeValue (valueName, toValue) {
       this[valueName] = toValue
+      this.valid = (this.formName.length && this.formImage.length && this.formPrice)
     },
     addProduct (formName, formDescription, formImage, formPrice) {
+      console.log('addProduct')
       if (!formName || !formImage || !formPrice) {
-        return this
+        return // todo highlight errors
       }
 
       this.$emit('addProduct', {
@@ -58,7 +65,11 @@ export default Vue.extend({
         price: formPrice
       })
     }
+  },
+  mounted() {
+    this.$refs.InputName.focus()
   }
+
 })
 </script>
 

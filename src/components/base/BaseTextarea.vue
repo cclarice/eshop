@@ -92,4 +92,5 @@ export default Vue.extend({
   pointer-events: none;
   user-select: none;
 }
+
 </style>

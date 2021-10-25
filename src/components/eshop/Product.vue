@@ -7,8 +7,13 @@
            :class="{ProductRemoveVisible: this.removeVisible}"
            @click="removeProduct"/>
     </div>
-    <div class="ProductImage"
-         :style="{ backgroundImage: 'url(' +  product.image + ')' }"/>
+    <div class="ProductImageContainer">
+      <img class="ProductImage"
+           :src="product.image"
+           :alt="'Image of ' + product.name"/>
+    </div>
+<!--    <div class="ProductImage"-->
+<!--         :style="{ backgroundImage: 'url(' +  product.image + ')' }"/>-->
     <h3 class="ProductHeader">
       {{ product.name }}
     </h3>
@@ -47,7 +52,7 @@ export default Vue.extend({
       let   price       = '' + priceString[priceString.length - 1]
 
       for (let i = priceString.length - 2; i >= 0; i--) {
-        if (!((i + 1) % 3)) {
+        if (!((priceString.length - i - 1) % 3)) {
           price = ' ' + price
         }
         price = priceString[i] + price
@@ -77,16 +82,37 @@ export default Vue.extend({
   display: flex;
   flex-direction: column;
   height: 423px;
-  .ProductImage {
+  .ProductImageContainer {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 4px 4px 0 0;
 
     width: 100%;
-    padding: 30.125% 0;
-    background-color: #DBDAE0;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    height: 47.28%;
     z-index: 5;
+    .ProductImage {
+      display: flex;
+      position: relative;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 4px 4px 0 0;
+      &:before {
+        content: ' ';
+        position: absolute;
+        display: block;
+        height: 100%;
+        width: 100%;
+        border-radius: 4px 4px 0 0;
+        background-image: url('../../assets/imageNotFound.png');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #DBDAE0;
+      }
+    }
   }
   .ProductHeader {
     font-weight: 600;
@@ -128,7 +154,6 @@ export default Vue.extend({
       animation: ease removeAppear 0.5s;
     }
   }
-
 }
 
 @keyframes removeAppear {

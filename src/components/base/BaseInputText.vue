@@ -7,10 +7,10 @@
     <input class="BaseInputTextText"
            :class="{ hasError: this.hasError }"
            :placeholder="placeholder"
-           type="text"
+           :type="type"
            @blur="checkValue"
            v-model="value"
-           @change="changeValue(value)">
+           @input="changeValue(value)"/>
     <span class="BaseInputTextError" :class="{ hasError: this.hasError }">{{ errorMessage }}</span>
   </label>
 </template>
@@ -28,6 +28,10 @@ export default Vue.extend({
     }
   },
   props: {
+    type: {
+      type: String,
+      default: 'text'
+    },
     header: {
       type: String,
       default: ''
@@ -43,12 +47,17 @@ export default Vue.extend({
     required: {
       type: Boolean,
       default: false
+    },
+    inputModeNumeric: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     changeValue (value) {
       console.log('TryChange to', value)
       this.$emit('changeValue', value)
+      this.checkValue()
     },
     checkValue () {
       this.hasError = (this.required && !this.value.length)
@@ -110,5 +119,15 @@ export default Vue.extend({
 .hasError {
   opacity: 1 !important;
   border-color: #FF8484;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
 </style>

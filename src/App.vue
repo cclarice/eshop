@@ -33,14 +33,31 @@ html,
 body,
 #app {
   width: 100vw;
-  height: 100vh;
-  overflow: visible;
+  height: 100%;
+  overflow-y: visible;
+  overflow-x: hidden;
   &::-webkit-scrollbar {
-
+    position: absolute;
+    width: 12px;
+    height: 12px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #FFFFFF;
+    border: 2px solid #ADADAD;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #FFFFFF;
+  }
+  &::-webkit-scrollbar-track {
+    background: #ADADAD;
+    border: 4px solid #FAF9F7;
+    border-radius: 10px;
   }
 }
 
 #app {
+  height: auto;
   background-color: #FAF9F7;
 }
 </style>

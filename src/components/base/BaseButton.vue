@@ -1,5 +1,7 @@
 <template>
-  <button class="BaseButton">
+  <button class="BaseButton"
+          @click="clickButton"
+          :disabled="disabled">
     {{ text }}
   </button>
 </template>
@@ -17,6 +19,11 @@ export default Vue.extend({
     disabled: {
       type: Boolean,
       default: true
+    }
+  },
+  methods: {
+    clickButton () {
+      this.$emit('clickButton')
     }
   }
 })
