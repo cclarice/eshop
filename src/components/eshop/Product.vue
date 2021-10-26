@@ -1,7 +1,9 @@
 <template>
   <div class="Product"
        @mouseenter="removeSetVisibility(true)"
-       @mouseleave="removeSetVisibility(false)">
+       @mouseleave="removeSetVisibility(false)"
+       :style="{animationDelay: index / 10 + 's', zIndex: 65536 - index}"
+       :id="'product' + index">
     <div v-if="this.removeVisible" class="ProductRemovePosition">
       <div class="ProductRemove"
            :class="{ProductRemoveVisible: this.removeVisible}"
@@ -21,7 +23,7 @@
       {{ product.description }}
     </p>
     <h2 class="ProductPrice">
-      {{ formatPrice }} ₽
+      {{ formatPrice !== '-1' ? formatPrice + '₽' : '-'}}
     </h2>
   </div>
 </template>
@@ -39,7 +41,11 @@ export default Vue.extend({
   props: {
     product: {
       type: Object,
-      default: {}
+      default: () => { return {} }
+    },
+    index: {
+      type: Number,
+      default: 0
     }
   },
   computed: {
@@ -67,6 +73,9 @@ export default Vue.extend({
     removeSetVisibility (visible) {
       this.removeVisible = visible
     }
+  },
+  mounted () {
+    setTimeout(() => {document.getElementById('product' + this.index).style.opacity = '1'}, this.index * 100 + 50)
   }
 })
 </script>
@@ -76,12 +85,20 @@ export default Vue.extend({
   background: #FFFEFB;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.04), 0 6px 10px rgba(0, 0, 0, 0.02);
   border-radius: 4px;
-  width: calc(33.3333% - 16px * 0.6666);
+  width: calc(25% - 16px * 0.75);
   margin-bottom: 16px;
 
   display: flex;
   flex-direction: column;
   height: 423px;
+  animation: ease productAppear 1s;
+  transition-duration: 175ms;
+  transform: scale(1) translateY(0);
+  opacity: 0;
+  &:hover {
+    transform: scale(1.025) translateY(1.25%);
+    z-index: 10;
+  }
   .ProductImageContainer {
     overflow: hidden;
     display: flex;
@@ -163,5 +180,52 @@ export default Vue.extend({
   to {
     transform: scale(1) translate(25%, -25%);
   }
+}
+
+@keyframes productAppear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ProductRemoving {
+  animation: ease productRemoving 500ms;
+}
+
+@keyframes productRemoving {
+  from {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(0);
+  }
+}
+
+@media (max-width: 1692px) {
+  .Product {
+    width: calc(33.3333% - 16px * 0.6666);
+  }
+}
+
+@media (max-width: 1360px) {
+  .Product {
+    width: calc(50% - 16px * 0.5);
+  }
+}
+
+@media (max-width: 1028px) {
+  .Product {
+    width: calc(100%);
+  }
+}
+
+@media (max-width: 696px) {
+
 }
 </style>

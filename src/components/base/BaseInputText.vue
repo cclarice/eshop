@@ -5,12 +5,13 @@
       <img v-if="required" class="BaseInputTextRequired" src="../../assets/required.svg" alt="Required">
     </span>
     <input class="BaseInputTextText"
-           :class="{ hasError: this.hasError }"
+           :class="{ hasErrorInput: this.hasError }"
            :placeholder="placeholder"
            :type="type"
            @blur="checkValue"
            v-model="value"
-           @input="changeValue(value)"/>
+           @input="changeValue(value)"
+           :autofocus="autofocus"/>
     <span class="BaseInputTextError" :class="{ hasError: this.hasError }">{{ errorMessage }}</span>
   </label>
 </template>
@@ -51,11 +52,14 @@ export default Vue.extend({
     inputModeNumeric: {
       type: Boolean,
       default: false
+    },
+    autofocus: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     changeValue (value) {
-      console.log('TryChange to', value)
       this.$emit('changeValue', value)
       this.checkValue()
     },
@@ -102,6 +106,14 @@ export default Vue.extend({
     &::placeholder {
       color: #B4B4B4;
     }
+    &:hover {
+      border-bottom: #7B7B7366 solid 1px;
+      padding-bottom: 9px;
+    }
+    &:active, &:focus {
+      border-bottom: #7BAE73 solid 1px;
+      padding-bottom: 9px;
+    }
   }
   .BaseInputTextError {
     opacity: 0;
@@ -118,7 +130,13 @@ export default Vue.extend({
 
 .hasError {
   opacity: 1 !important;
-  border-color: #FF8484;
+}
+.hasErrorInput {
+  border: #FF8484 solid 1px !important;
+  padding: 9px 13px !important;
+  &:focus {
+    box-shadow: 0 0 8px 2px #FF8484;
+  }
 }
 
 input::-webkit-outer-spin-button,

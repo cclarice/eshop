@@ -2,12 +2,16 @@
   <div class="Eshop">
     <header class="EshopHeader">
       <h1>Добавление товара</h1>
-      <BaseDropdown/>
+      <BaseDropdown class="EshopDropdown"
+                    :options="sortOptions"
+                    :default="sortOptions[0]"
+                    @changeValue="sort($event)"/>
     </header>
     <main class="EshopMain">
       <ProductForm class="EshopProductForm"
                    @addProduct="addProduct($event)"/>
-      <ProductStack class="EshopProductStack"
+      <ProductStack v-if="!sorting"
+                    class="EshopProductStack"
                     :products="this.products"
                     @removeProduct="removeProduct($event)"/>
     </main>
@@ -52,7 +56,7 @@ export default Vue.extend({
           name: 'Image error',
           description: 'Image not found',
           price: 404
-        }/*,
+        },
         {
           id: 3,
           name: 'Norco Aurum',
@@ -73,8 +77,27 @@ export default Vue.extend({
           description: 'Самый технологичный мотошлем, который можно найти. Новая высокоэффективная система вентиляции и свежий подход к защите от прямых и боковых ударов.',
           image: '/products/foxHelmetv3.jpg',
           price: 16836
-        }*/
-      ]
+        }
+      ],
+      sortOptions: [
+        {
+          name: '',
+          text: 'По умолчанию'
+        },
+        {
+          name: 'byName',
+          text: 'По Имени'
+        },
+        {
+          name: 'byPriceMax',
+          text: 'Цена: 📈'
+        },
+        {
+          name: 'byPriceMin',
+          text: 'Цена: 📉'
+        }
+      ],
+      sorting: false
     }
   },
   methods: {
@@ -83,6 +106,25 @@ export default Vue.extend({
     },
     removeProduct (productId) {
       this.products = this.products.filter(p => p.id !== productId)
+    },
+    async sort (sortOption) {
+      const pro = this.products
+      this.sorting = true
+
+      function sortSort (his) {
+        if (sortOption === '') {
+          his.products = pro.sort((firstEl, secondEl) => { return firstEl.id > secondEl.id ? 1 : -1 })
+        } else if (sortOption === 'byName') {
+          his.products = pro.sort((firstEl, secondEl) => { return firstEl.name > secondEl.name ? 1 : -1 })
+        } else if (sortOption === 'byPriceMax') {
+          his.products = pro.sort((firstEl, secondEl) => { return firstEl.price > secondEl.price ? 1 : -1 })
+        } else if (sortOption === 'byPriceMin') {
+          his.products = pro.sort((firstEl, secondEl) => { return firstEl.price < secondEl.price ? 1 : -1 })
+        }
+        his.sorting = false
+      }
+
+      setTimeout(sortSort, 100, this)
     }
   }
 })
@@ -96,9 +138,11 @@ export default Vue.extend({
     height: 36px;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 
     h1 {
+      position: absolute;
+      width: calc(100% - 64px);
       font-weight: 600;
       font-size: 28px;
       line-height: 36px;
@@ -113,7 +157,7 @@ export default Vue.extend({
     justify-content: space-between;
     align-items: flex-start;
     .EshopProductForm {
-      width: calc(25% - 16px * 0.75);
+      width: calc(20% - 16px * 0.8);
 
       box-shadow: 0 20px 30px rgba(0, 0, 0, 0.04), 0 6px 10px rgba(0, 0, 0, 0.02);
 
@@ -122,9 +166,87 @@ export default Vue.extend({
       padding: 24px;
     }
     .EshopProductStack {
-      width: calc(75% - 16px * 0.25);
+      width: calc(80% - 16px * 0.2);
     }
   }
 }
 
+@media (min-width: 1984px) {
+  .Eshop {
+    padding: 32px calc((100vw - 1920px) / 2);
+    h1 {
+      width: calc(100vw - (100vw - 1920px)) !important;
+    }
+  }
+}
+
+@media (max-width: 1692px) {
+  .Eshop {
+    .EshopMain {
+      margin-top: 16px;
+      width: 100%;
+      height: auto;
+      .EshopProductForm {
+        width: calc(25% - 16px * 0.75);
+      }
+      .EshopProductStack {
+        width: calc(75% - 16px * 0.25);
+      }
+    }
+  }
+}
+
+@media (max-width: 1360px) {
+  .Eshop {
+    .EshopMain {
+      margin-top: 16px;
+      width: 100%;
+      height: auto;
+      .EshopProductForm {
+        width: calc(33.3333% - 16px * 0.6666);
+      }
+      .EshopProductStack {
+        width: calc(66.6666% - 16px * 0.3333);
+      }
+    }
+  }
+}
+
+@media (max-width: 1028px) {
+  .Eshop {
+    .EshopMain {
+      margin-top: 16px;
+      width: 100%;
+      height: auto;
+      .EshopProductForm {
+        width: calc(50% - 16px * 0.5);
+      }
+      .EshopProductStack {
+        width: calc(50% - 16px * 0.5);
+      }
+    }
+  }
+}
+
+@media (max-width: 696px) {
+  .Eshop {
+    h1 {
+      font-size: 20px !important;
+    }
+    .EshopMain {
+      margin-top: 16px;
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      .EshopProductForm {
+        width: 100%;
+      }
+      .EshopProductStack {
+        padding-top: 16px;
+        width: 100%;
+      }
+    }
+  }
+}
 </style>

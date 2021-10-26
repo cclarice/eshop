@@ -56,7 +56,7 @@ body,
   }
 }
 
-#app {
+#app, body {
   height: auto;
   background-color: #FAF9F7;
 }

@@ -5,7 +5,7 @@
                    :placeholder="'Введите наименование товара'"
                    :required="true"
                    @changeValue="changeValue('formName', $event)"
-                   ref="InputName"/>
+                   :autofocus="true"/>
     <BaseTextarea class="FormDescription"
                   header="Описание товара"
                   :placeholder="'Введите описание товара'"
@@ -52,7 +52,6 @@ export default Vue.extend({
       this.valid = (this.formName.length && this.formImage.length && this.formPrice)
     },
     addProduct (formName, formDescription, formImage, formPrice) {
-      console.log('addProduct')
       if (!formName || !formImage || !formPrice) {
         return // todo highlight errors
       }
@@ -65,11 +64,7 @@ export default Vue.extend({
         price: formPrice
       })
     }
-  },
-  mounted() {
-    this.$refs.InputName.focus()
   }
-
 })
 </script>
 

@@ -5,7 +5,8 @@
       <img v-if="required" class="BaseTextareaRequired" src="../../assets/required.svg" alt="Required">
     </span>
     <textarea class="BaseTextareaText"
-              :class="{hasError: hasError}">
+              :class="{hasError: hasError}"
+              :placeholder="placeholder">
     </textarea>
     <!-- Unused <span class="BaseTextareaError"> {{ hasError ? errorMessage : '' }} </span> -->
   </label>
@@ -18,7 +19,8 @@ export default Vue.extend({
   name: 'BaseTextarea',
   data () {
     return {
-      errorMessage: 'Поле является обязательным'
+      errorMessage: 'Поле является обязательным',
+      hasError: false
     }
   },
   props: {
@@ -37,11 +39,11 @@ export default Vue.extend({
     required: {
       type: Boolean,
       default: false
-    },
+    }/* ,
     hasError: {
       type: Boolean,
       default: false
-    }
+    } */
   },
   methods: {
     changeValue (value) {
@@ -82,10 +84,28 @@ export default Vue.extend({
     font-size: 12px;
     line-height: 15px;
     color: #3F3F3F;
+    &::placeholder {
+      color: #B4B4B4;
+    }
+    &:hover {
+      border-bottom: #7B7B7366 solid 1px;
+      padding-bottom: 9px;
+    }
+    &:active, &:focus {
+      border-bottom: #7BAE73 solid 1px;
+      padding-bottom: 9px;
+    }
   }
 }
 .hasError {
-  border-color: #FF8484
+  opacity: 1 !important;
+}
+.hasErrorInput {
+  border: #FF8484 solid 1px !important;
+  padding: 9px 13px !important;
+  &:focus {
+    box-shadow: 0 0 8px 2px #FF8484;
+  }
 }
 .invisible {
   opacity: 0;
